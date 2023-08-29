@@ -6,7 +6,7 @@ import React from 'react'
 function page() {
     return (
         <div className="min-h-screen bg-gray-200 flex relative overflow-hidden">
-            <SideBar currentPage={'home'} />
+            <SideBar currentPage={'browse'} />
             <div className='w-full p-3'>
                 <Header />
                 <Topchart />

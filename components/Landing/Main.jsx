@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { TbPlayerPlay, TbPlayerPlayFilled } from 'react-icons/tb'
 
 function Main() {
     return (
@@ -23,8 +24,13 @@ function Main() {
                     </p>
                 </div>
                 <div className='my-3 flex mt-8 items-center'>
-                    <Link href={'/home'} className='bg-white hover:bg-blue-400 duration-500 transition-colors  cursor-pointer bg-opacity-30 px-4 py-3 rounded-lg'>
-                        Play now
+                    <Link href={'/home'} className='bg-white hover:bg-blue-400 duration-500 transition-colors flex items-center cursor-pointer bg-opacity-30 px-4 py-3 rounded-lg'>
+                        <div className='bg-white text-black rounded-full p-2 text-sm'>
+                            <TbPlayerPlayFilled />
+                        </div>
+                        <span className='ml-3'>
+                            Play now
+                        </span>
                     </Link>
 
                     <Link href={'/'} className='ml-10 duration-500 transition-colors cursor-pointer hover:text-blue-400'>
