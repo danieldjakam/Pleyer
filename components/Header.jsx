@@ -4,13 +4,13 @@ import { TbSearch } from 'react-icons/tb'
 
 function Header() {
     return (
-        <div className='flex w-full justify-between py-4'>
+        <div className='flex w-full justify-between py-4 items-center'>
             <div className='relative'>
-                <span className='absolute top-2 left-2 text-gray-400'>
+                <span className='absolute top-3 left-2 text-gray-400'>
                     <TbSearch />
                 </span>
                 <input type='text' className='bg-transparent border border-gray-400 px-3 py-2 pl-7
-                                    rounded-lg w-64 text-xs focus:outline-none text-blue-800 caret-blue-800'
+                                    rounded-lg w-64 text-xs focus:outline-none text-blue-800 caret-blue-800 h-10'
                     placeholder='Search for song, artist, etc..' />
             </div>
 

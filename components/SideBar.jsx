@@ -7,7 +7,7 @@ import { GiAlarmClock, GiFaceToFace, GiPerson, GiWomanElfFace } from "react-icon
 function SideBar({ currentPage }) {
     // const currentPage = window.location.href.split('/')[3];
     return (
-        <div className='w-64 flex flex-col  bg-white p-5'>
+        <div className='w-64 fixed h-screen flex flex-col  bg-white p-5'>
             <div className='flex items-center flex-col w-full'>
                 <div className='w-24 overflow-hidden h-24 rounded-full bg-blue-500 shadow-xl shadow-slate-400 flex items-end justify-center'>
                     <Image alt='Profile' src={'/me.png'} width={80} height={80} />
