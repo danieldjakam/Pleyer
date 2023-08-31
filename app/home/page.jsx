@@ -8,7 +8,6 @@ import NowPlaying from '@/components/Home/NowPlaying'
 function page() {
     return (
         <>
-            <Header />
             <Topchart />
             <div className='md:flex mt-9'>
                 <div className='w-[calc(100%-408px)]'>

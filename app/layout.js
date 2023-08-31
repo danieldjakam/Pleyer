@@ -1,6 +1,7 @@
 import SideBar from '@/components/SideBar'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import Header from '@/components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
 				<div className="min-h-screen bg-slate-100 flex relative overflow-hidden">
 					<SideBar currentPage={'home'} />
 					<div className='w-[calc(100%-16rem)] py-3 pb-7 px-8 ml-64'>
+						<Header />
 						{children}
 					</div>
 				</div>
