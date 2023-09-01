@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb'
-import Album from './Album'
-import { fetchPopularAlbums } from '@/const/albums'
+import { HorizontalScrollAlbums } from '../Albums'
+import { fetchNewAlbums } from '@/const/albums'
 
-async function Topchart() {
-    const albums = await fetchPopularAlbums()
+export async function NewReleases() {
+    const albums = await fetchNewAlbums()
     return (
         <div className=''>
             <div className='flex justify-between items-end'>
                 <div>
                     <h1 className='title'>
-                        Billboard Topchart
+                        New Releases
                     </h1>
                     <p className='counts'>{albums.length} Albums</p>
                 </div>
@@ -23,17 +23,7 @@ async function Topchart() {
                     </button>
                 </div>
             </div>
-            <div
-                className="flex mt-4 overflow-x-scroll scrollbar-hide"
-            >
-                <div className="flex flex-nowrap space-x-3">
-                    {
-                        albums.map((album, id) => <Album key={album.id} album={album} />)
-                    }
-                </div>
-            </div>
+            <HorizontalScrollAlbums albums={albums} />
         </div>
     )
 }
-
-export default Topchart

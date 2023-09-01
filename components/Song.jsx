@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { FaCaretLeft, FaHeart } from 'react-icons/fa'
 
-function LinearSong({ song, number }) {
+export function LinearSong({ song, number }) {
     return (
         <div className='flex mb-4 items-center bg-white shadow-sm py-2 rounded-lg px-7'>
             <h2 className='music_title w-1/12'>{number + 1}</h2>
@@ -28,4 +28,24 @@ function LinearSong({ song, number }) {
     )
 }
 
-export default LinearSong
+
+export function OneColumnForLinear({ songs }) {
+    return (
+
+        <div className=''>
+            {
+                songs.map((song, id) => <LinearSong key={song.id} song={song} number={id} />)
+            }
+        </div>
+    )
+}
+
+export function ManyColumnForLinear({ songs }) {
+    return (
+        <div className='grid md:mb-12 md:grid-cols-2 gap-4'>
+            {
+                songs.map((song, id) => <LinearSong key={song.id} song={song} number={id} />)
+            }
+        </div>
+    )
+}

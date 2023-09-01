@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { TbBrowser, TbFile, TbFileMusic, TbHome, TbPlayerEjectFilled, TbTimeline, TbVideo } from "react-icons/tb";
-import { GiAlarmClock, GiFaceToFace, GiPerson, GiWomanElfFace } from "react-icons/gi";
+import { TbBrowser, TbFile, TbFileMusic, TbHome, TbPlayerEjectFilled, TbSearch, TbVideo } from "react-icons/tb";
+import { GiAlarmClock, GiFaceToFace } from "react-icons/gi";
 
 function SideBar({ currentPage }) {
     // const currentPage = window.location.href.split('/')[3];
@@ -31,7 +31,7 @@ function SideBar({ currentPage }) {
                         </Link>
                     </li>
                     <li className='py-2'>
-                        <Link href={'/album'} className={`flex items-center hover:text-blue-800 ${currentPage == 'album' ? `text-blue-600` : ``}`}>
+                        <Link href={'/albums'} className={`flex items-center hover:text-blue-800 ${currentPage == 'album' ? `text-blue-600` : ``}`}>
                             <TbFileMusic />
                             <span className="ml-3">Albums</span>
                         </Link>
@@ -44,8 +44,8 @@ function SideBar({ currentPage }) {
                     </li>
                     <li className='py-2'>
                         <Link href={'/videos'} className={`flex items-center hover:text-blue-800 ${currentPage == 'videos' ? `text-blue-600` : ``}`}>
-                            <TbVideo />
-                            <span className="ml-3">Videos</span>
+                            <TbSearch />
+                            <span className="ml-3">Search</span>
                         </Link>
                     </li >
                 </ul >

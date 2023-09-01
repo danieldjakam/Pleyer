@@ -1,6 +1,6 @@
 import React from 'react'
-import LinearSong from './LinearSong'
 import { fetchPopularTracks } from '@/const/songs'
+import { OneColumnForLinear } from '../Song'
 
 async function MostPopular() {
     const popularTracks = await fetchPopularTracks()
@@ -8,16 +8,11 @@ async function MostPopular() {
         <div className=''>
             <div className='mb-4'>
                 <h1 className='title'>
-                    Most Popular
+                    Most Popular Tracks
                 </h1>
                 <p className='counts'>{popularTracks.length} songs</p>
             </div>
-
-            <div className=''>
-                {
-                    popularTracks.map((song, id) => <LinearSong key={song.id} song={song} number={id} />)
-                }
-            </div>
+            <OneColumnForLinear songs={popularTracks} />
         </div>
     )
 }

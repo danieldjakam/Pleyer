@@ -1,14 +1,15 @@
-import Header from '@/components/Header'
-import Topchart from '@/components/Home/Topchart'
-import SideBar from '@/components/SideBar'
 import React from 'react'
 import MostPopular from '@/components/Home/MostPopular'
 import NowPlaying from '@/components/Home/NowPlaying'
+import { AlbumsByGroup } from '@/components/Albums';
+import { fetchPopularAlbums } from '@/const/albums';
 
-function page() {
+async function page() {
+
+    const popularAlbums = await fetchPopularAlbums()
     return (
         <>
-            <Topchart />
+            <AlbumsByGroup title={'Billboard Topchart'} albums={popularAlbums} />
             <div className='md:flex mt-9'>
                 <div className='w-[calc(100%-408px)]'>
                     <MostPopular />
