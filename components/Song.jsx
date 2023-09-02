@@ -4,6 +4,14 @@ import React from 'react'
 import { FaCaretLeft, FaHeart } from 'react-icons/fa'
 
 export function LinearSong({ song, number }) {
+    const contributors = () => {
+        {
+            return song.contributors &&
+                song.contributors.filter(r => r.id !== song.artist.id).length > 0 ?
+                `Ft ${song.contributors.filter(r => r.id !== song.artist.id).map(ar => ` ${ar.name}`)}`
+                : ''
+        }
+    }
     return (
         <div className='flex mb-4 items-center bg-white shadow-sm py-2 rounded-lg px-7'>
             <h2 className='music_title w-1/12'>{number + 1}</h2>
@@ -16,9 +24,7 @@ export function LinearSong({ song, number }) {
             </div>
             <div className='w-1/2'>
                 <p className='artist_name'>{song.artist.name}</p>
-                <p className='artist_name'>
-                    {song.contributors ? `feat ${contributors.map(c => c.name)}` : ''}
-                </p>
+                <p className='artist_name'>{contributors().trimEnd(',')}</p>
             </div>
             <p className='artist_name w-1/6'>{formatTime(song.duration)}</p>
             <button className={` w-1/12 ${song.isLiked ? 'text-pink-600' : 'text-gray-400'}`}>

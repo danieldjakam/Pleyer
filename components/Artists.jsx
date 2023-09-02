@@ -1,10 +1,11 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb'
 
 function Artist({ artist }) {
     return (
-        <div key={artist.id} className="inline-block">
+        <Link href={`/artists/${artist.id}`} key={artist.id} className="inline-block">
             <div
                 className={`max-w-xl overflow-hidden rounded-xl duration-300 ease-in-out  ${artist.id == 1 ? 'w-60' : "w-56"}`}
             >
@@ -15,7 +16,7 @@ function Artist({ artist }) {
                     <h1 className='music_title mt-4'>{artist.name}</h1>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 export function HorizontalScrollArtist({ artists }) {

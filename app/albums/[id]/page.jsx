@@ -1,4 +1,9 @@
+import { fetchOneAlbum } from '@/const/albums'
+import { fetchSongsByAlbum } from '@/const/songs'
+import { formatNumber, formatTime } from '@/const/utils'
+import Image from 'next/image'
 import React from 'react'
+import { TbHeart, TbHeartFilled } from 'react-icons/tb'
 export async function generateStaticParams() {
     return [{ id: '1' }, { id: '2' }]
 }
@@ -22,91 +27,80 @@ export async function generateMetadata(
         },
     }
 }
-export default function page({ params }) {
+export default async function page({ params }) {
 
+    const tracks = await fetchSongsByAlbum(params.id)
+    const album = await fetchOneAlbum(params.id);
+
+    console.log(tracks);
+    const contributors = () => {
+        {
+            return album.contributors &&
+                album.contributors.filter(r => r.id !== album.artist.id).length > 0 ?
+                `Ft ${album.contributors.filter(r => r.id !== album.artist.id).map(ar => ` ${ar.name}`)}`
+                : ''
+        }
+    }
 
     return (
 
-        // <div class="bg-black text-gray-300 min-h-screen p-10">
+        <div class="min-h-screen p-10">
 
-        //     <div class="flex">
-        //         <img class="mr-6" src="https://placekitten.com/g/200/200" />
-        //         <div class="flex flex-col justify-center">
-        //             <h4 class="mt-0 mb-2 uppercase text-gray-500 tracking-widest text-xs">Playlist</h4>
-        //             <h1 class="mt-0 mb-2 text-white text-4xl">Spotify Album Page with Tailwind CSS</h1>
+            <div class="flex bg-blue-600 p-3 rounded-lg">
+                <Image class="mr-6" src={album.cover_big} alt={album.title} width={200} height={200} />
+                <div class="flex flex-col justify-center">
+                    <h4 class="mt-0 mb-2 uppercase text-white opacity-60 tracking-widest text-xs">Playlist</h4>
+                    <h1 class="mt-0 mb-2 text-4xl text-white">{album.title}</h1>
 
-        //             <p class="text-gray-600 mb-2 text-sm">With J. Cole, Quavo, Ty Dollar $ign</p>
-        //             <p class="text-gray-600 text-sm">Created by <a>Spotify</a> - 50 songs, 3 hr 2 min</p>
-        //         </div>
-        //     </div>
+                    <p class="text-white opacity-60 mb-2 text-sm">{contributors() ? `Ft ${contributors().trimEnd(',')}` : ''}</p>
+                    <p class="text-white opacity-40 text-sm">Created by <a>{album.artist ? album.artist.name : ''}</a> - {album.nb_tracks} songs, {formatTime(album.duration)}</p>
+                </div>
+            </div>
 
-        //     <div class="mt-6 flex justify-between">
-        //         <div class="flex">
-        //             <button class="mr-2 bg-green-500 text-green-100 block py-2 px-8 rounded-full">Play</button>
-        //             <button class="mr-2 border border-white block p-2 rounded-full"><img src="https://image.flaticon.com/icons/svg/2485/2485986.svg" height="25" width="25" /></button>
-        //             <button class="mr-2 border border-white block p-2 rounded-full">...</button>
-        //         </div>
-        //         <div class="text-gray-600 text-sm tracking-widest text-right">
-        //             <h5 class="mb-1">Followers</h5>
-        //             <p>5,055</p>
-        //         </div>
-        //     </div>
+            <div class="mt-6 flex justify-between">
+                <div class="flex">
+                    <button class="mr-2 bg-blue-500 text-blue-100 block py-2 px-8 rounded-full">Play</button>
+                </div>
+                <div class="text-gray-600 text-sm tracking-widest text-right">
+                    <h5 class="mb-1">Listeners</h5>
+                    <p>{formatNumber(album.fans)}</p>
+                </div>
+            </div>
 
-        //     <div class="mt-10">
-        //         <div class="flex text-gray-600">
-        //             <div class="p-2 w-8 flex-shrink-0"></div>
-        //             <div class="p-2 w-8 flex-shrink-0"></div>
-        //             <div class="p-2 w-full">Title</div>
-        //             <div class="p-2 w-full">Artist</div>
-        //             <div class="p-2 w-full">Album</div>
-        //             <div class="p-2 w-12 flex-shrink-0 text-right">⏱</div>
-        //         </div>
+            <div class="mt-10">
+                <div class="flex text-gray-600">
+                    <div class="p-2 w-full">Title</div>
+                    <div class="p-2 w-full">Artist</div>
+                    <div class="p-2 w-full">Album</div>
+                    <div class="p-2 w-full">⏱</div>
+                    <div class="p-2 w-12 flex-shrink-0 text-pink-500 text-right"><TbHeartFilled /></div>
+                </div>
 
-        //         <div class="flex border-b border-gray-800 hover:bg-gray-800">
-        //             <div class="p-3 w-8 flex-shrink-0">▶️</div>
-        //             <div class="p-3 w-8 flex-shrink-0">❤️</div>
-        //             <div class="p-3 w-full">My Song Here</div>
-        //             <div class="p-3 w-full">Eminem</div>
-        //             <div class="p-3 w-full">Spotify</div>
-        //             <div class="p-3 w-12 flex-shrink-0 text-right">5:35</div>
-        //         </div>
-        //         <div class="flex border-b border-gray-800 hover:bg-gray-800">
-        //             <div class="p-3 w-8 flex-shrink-0">▶️</div>
-        //             <div class="p-3 w-8 flex-shrink-0">❤️</div>
-        //             <div class="p-3 w-full">My Song Here</div>
-        //             <div class="p-3 w-full">Eminem</div>
-        //             <div class="p-3 w-full">Spotify</div>
-        //             <div class="p-3 w-12 flex-shrink-0 text-right">5:35</div>
-        //         </div>
-        //         <div class="flex border-b border-gray-800 hover:bg-gray-800">
-        //             <div class="p-3 w-8 flex-shrink-0">▶️</div>
-        //             <div class="p-3 w-8 flex-shrink-0">❤️</div>
-        //             <div class="p-3 w-full">My Song Here</div>
-        //             <div class="p-3 w-full">Eminem</div>
-        //             <div class="p-3 w-full">Spotify</div>
-        //             <div class="p-3 w-12 flex-shrink-0 text-right">5:35</div>
-        //         </div>
-        //         <div class="flex border-b border-gray-800 hover:bg-gray-800">
-        //             <div class="p-3 w-8 flex-shrink-0">▶️</div>
-        //             <div class="p-3 w-8 flex-shrink-0">❤️</div>
-        //             <div class="p-3 w-full">My Song Here</div>
-        //             <div class="p-3 w-full">Eminem</div>
-        //             <div class="p-3 w-full">Spotify</div>
-        //             <div class="p-3 w-12 flex-shrink-0 text-right">5:35</div>
-        //         </div>
-        //         <div class="flex border-b border-gray-800 hover:bg-gray-800">
-        //             <div class="p-3 w-8 flex-shrink-0">▶️</div>
-        //             <div class="p-3 w-8 flex-shrink-0">❤️</div>
-        //             <div class="p-3 w-full">My Song Here</div>
-        //             <div class="p-3 w-full">Eminem</div>
-        //             <div class="p-3 w-full">Spotify</div>
-        //             <div class="p-3 w-12 flex-shrink-0 text-right">5:35</div>
-        //         </div>
-        //     </div>
-        // </div>
-        <>
+                {
+                    tracks ?
+                        tracks.map(track => {
+                            return <div key={track.id} class="flex border-b items-center mb-1 cursor-pointer bg-blue-100 hover:bg-blue-300 rounded-lg">
+                                <div class="p-3 w-full">{track.title}</div>
+                                <div class="p-3 w-full">{track.artist ? track.artist.name : ''}</div>
+                                <div class="p-3 w-full">{album.title}</div>
+                                <div class="p-3 w-full">{formatTime(track.duration)}</div>
+                                <div class="p-2 w-12 flex-shrink-0 text-pink-500 text-right"><TbHeartFilled /></div>
+                            </div>
+                        })
+                        :
+                        <div class="flex border-b">
+                            <div class="p-3 w-full">no</div>
+                            <div class="p-3 w-full">track</div>
+                            <div class="p-3 w-full">in this</div>
+                            <div class="p-3 w-12 flex-shrink-0 text-right">album</div>
+                            <div class="p-2 w-8 flex-shrink-0"></div>
+                        </div>
+                }
+            </div>
+        </div>
+        // <>
 
-            {params.id}
-        </>
+        //     {params.id}
+        // </>
     )
 }

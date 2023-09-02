@@ -1,9 +1,23 @@
 export function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
     const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
+    seconds %= 60;
 
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-    return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+export function formatNumber(number) {
+    if (isNaN(number)) {
+        return "Invalid number";
+    }
+    const numberString = number.toString();
+    const parts = numberString.split(".");
+    const formattedIntegerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (parts.length === 2) {
+        return `${formattedIntegerPart}.${parts[1]}`;
+    } else {
+        return formattedIntegerPart;
+    }
 }

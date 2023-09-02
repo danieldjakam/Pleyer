@@ -43,7 +43,7 @@ function SideBar({ currentPage }) {
                         </Link>
                     </li>
                     <li className='py-2'>
-                        <Link href={'/videos'} className={`flex items-center hover:text-blue-800 ${currentPage == 'videos' ? `text-blue-600` : ``}`}>
+                        <Link href={'/search'} className={`flex items-center hover:text-blue-800 ${currentPage == 'videos' ? `text-blue-600` : ``}`}>
                             <TbSearch />
                             <span className="ml-3">Search</span>
                         </Link>

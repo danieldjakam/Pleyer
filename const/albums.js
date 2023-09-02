@@ -49,11 +49,53 @@ export async function fetchNewAlbums() {
     return albums;
 }
 
+export async function fetchOneAlbum(id) {
+    const apiKey = '97f69ef51a37026b11c7a0f264c65a8e';
+    const apiUrl = `https://api.deezer.com/album/${id}?output=json`;
+
+    let album = {}
+    await fetch(apiUrl, {
+        headers: {
+            'X-RapidAPI-Key': apiKey
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                album = data;
+            } else {
+                console.log('Aucun album populaire trouvée.');
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite :', error);
+        });
+
+    return album;
+}
 
 
+export async function fetchAlbumsByArtist(id) {
+    const apiKey = '97f69ef51a37026b11c7a0f264c65a8e';
+    const apiUrl = `https://api.deezer.com/artist/${id}/albums?limit=20`
 
+    let albums = []
+    await fetch(apiUrl, {
+        headers: {
+            'X-RapidAPI-Key': apiKey
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.data && data.data.length > 0) {
+                albums = data.data;
+            } else {
+                console.log('Aucun album populaire trouvée.');
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite :', error);
+        });
 
-
-
-
-
+    return albums;
+}

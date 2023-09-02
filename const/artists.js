@@ -22,3 +22,29 @@ export async function fetchNewArtists() {
 
     return tracks;
 }
+
+export async function fetchOneArtist(id) {
+    const apiKey = '97f69ef51a37026b11c7a0f264c65a8e';
+    const apiUrl = `https://api.deezer.com/artist/${id}?output=json`;
+
+    let artist = {}
+    await fetch(apiUrl, {
+        headers: {
+            'X-RapidAPI-Key': apiKey
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                artist = data;
+            } else {
+                console.log('Aucun artiste populaire trouvée.');
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite :', error);
+        });
+
+    return artist;
+}
+
