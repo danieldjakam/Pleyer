@@ -68,6 +68,12 @@ export default async function page({ params }) {
             </div>
 
             <div class="mt-10">
+                <div className='mb-6'>
+                    <h1 className='title'>
+                        All associed songs
+                    </h1>
+                    <p className='counts'>{tracks.length} songs</p>
+                </div>
                 <div class="flex text-gray-600">
                     <div class="p-2 w-full">Title</div>
                     <div class="p-2 w-full">Artist</div>
