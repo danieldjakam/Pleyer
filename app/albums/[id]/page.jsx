@@ -3,6 +3,7 @@ import { fetchSongsByAlbum } from '@/const/songs'
 import { formatNumber, formatTime } from '@/const/utils'
 import Image from 'next/image'
 import React from 'react'
+import { FaPlay } from 'react-icons/fa'
 import { TbHeart, TbHeartFilled } from 'react-icons/tb'
 export async function generateStaticParams() {
     return [{ id: '1' }, { id: '2' }]
@@ -31,8 +32,6 @@ export default async function page({ params }) {
 
     const tracks = await fetchSongsByAlbum(params.id)
     const album = await fetchOneAlbum(params.id);
-
-    console.log(tracks);
     const contributors = () => {
         {
             return album.contributors &&
@@ -59,7 +58,10 @@ export default async function page({ params }) {
 
             <div class="mt-6 flex justify-between">
                 <div class="flex">
-                    <button class="mr-2 bg-blue-500 text-blue-100 block py-2 px-8 rounded-full">Play</button>
+                    <button class="mr-2 bg-blue-500 hover:bg-blue-600 text-blue-100 py-2 flex items-center px-8 rounded-full">
+                        <FaPlay />
+                        <span class="ml-1">Play</span>
+                    </button>
                 </div>
                 <div class="text-gray-600 text-sm tracking-widest text-right">
                     <h5 class="mb-1">Listeners</h5>
