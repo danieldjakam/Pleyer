@@ -6,7 +6,8 @@ import { fetchPopularAlbums } from '@/const/albums';
 
 async function page() {
 
-    const popularAlbums = await fetchPopularAlbums()
+    const popularAlbums = await fetchPopularAlbums();
+
     return (
         <>
             <AlbumsByGroup title={'Billboard Topchart'} albums={popularAlbums} />

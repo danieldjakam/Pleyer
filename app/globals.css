@@ -24,12 +24,29 @@
     height: 0;
 }
 
-.LectureCard::after {
+.progress::after {
     position: absolute;
     display: block;
-    width: 20px;
-    height: 20px;
-    @apply bg-blue-600;
+    content: '';
+    width: 13px;
+    height: 13px;
+    @apply bg-red-700;
     border-radius: 50%;
-
+    top: calc(-50% - 2px);
+    right: -6.5px;
 }
+
+.progress::before {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 7px;
+    height: 7px;
+    @apply bg-white;
+    border-radius: 50%;
+    top: calc(-50% + 1.2px);
+    right: -3.5px;
+    z-index: 2;
+}
+
+.rotation {}

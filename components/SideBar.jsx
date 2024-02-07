@@ -1,11 +1,17 @@
-import React from 'react';
+'use client'
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { TbBrowser, TbFile, TbFileMusic, TbHome, TbPlayerEjectFilled, TbSearch, TbVideo } from "react-icons/tb";
 import { GiAlarmClock, GiFaceToFace } from "react-icons/gi";
 
-function SideBar({ currentPage }) {
-    // const currentPage = window.location.href.split('/')[3];
+function SideBar() {
+    let currentPage = 'home'
+    useEffect(() => {
+        currentPage = window?.location?.href?.split('/')[3];
+        console.log(window.location)
+    }, [])
+    console.log(currentPage);
     return (
         <div className='w-64 fixed h-screen flex flex-col  bg-white p-5'>
             <div className='flex items-center flex-col w-full'>

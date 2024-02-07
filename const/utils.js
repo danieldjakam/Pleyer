@@ -21,3 +21,7 @@ export function formatNumber(number) {
         return formattedIntegerPart;
     }
 }
+
+export function getPercentOfTime(time, endTime) {
+    return Math.round((time / endTime) * 100);
+}
